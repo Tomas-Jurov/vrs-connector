@@ -1,15 +1,9 @@
-import threading
 from joystickController import JoystickController
-
-joystickController = JoystickController()
-
-thread1 = threading.Thread(target=joystickController.controller())
-thread1.start()
-
-thread2 = threading.Thread(target=joystickController.videostream())
-thread2.start()
-
+from flaskApp import flaskApp
 
 
 if __name__ == '__main__':
-    joystickController.app.run(host="192.168.0.171", port=5000)
+    joystickController = JoystickController()
+    joystickController.controller()
+    #stream = flaskApp(joystickController)
+    #stream.start()

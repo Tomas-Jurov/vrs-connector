@@ -17,11 +17,11 @@ class Joystick():
     def __init__(self):
         self._port = Joystick._get_port(Joystick._ports)
         self._serial = serial.Serial(self._port, 234000, timeout=0.2)
-        self._cm : int
-        self._lr : int
-        self._fb : int
-        self._ud : int
-        self._yv : int
+        self._cm = 0
+        self._lr = 0
+        self._fb = 0
+        self._ud = 0
+        self._yv = 0
 
     def flush_buffers(self):
         time.sleep(2)
@@ -47,6 +47,8 @@ class Joystick():
             self._cm=112
         elif(_start_bit==b'\x6F'):
             self._cm=111
+        if(self._cm!=0):
+            self._get_read_tuple()
         return((self._cm,self._lr,self._fb,self._ud,self._yv))
 
 
