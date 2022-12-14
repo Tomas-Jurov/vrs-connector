@@ -1,10 +1,12 @@
 from djitellopy import tello
 from joystick import Joystick
 from time import sleep
+#from threading import Thread
 
 class JoystickController():
 
     def __init__(self) -> None:
+        #Thread.__init__(self)
         self._joystick = Joystick()
         self._joystick.flush_buffers()
         self._me=tello.Tello()
@@ -37,3 +39,5 @@ class JoystickController():
                 self._me.send_rc_control(lr, fb, ud, yv)  
             else:
                 self._me.send_rc_control(0,0,0,0)
+    # def run(self):
+    #     self.controller()    
