@@ -1,16 +1,18 @@
 from djitellopy import tello
 from joystick import Joystick
 from time import sleep
-#from threading import Thread
+from threading import Thread
 
-class JoystickController():
+class JoystickController(Thread):
 
     def __init__(self) -> None:
-        #Thread.__init__(self)
+        Thread.__init__(self)
         self._joystick = Joystick()
         self._joystick.flush_buffers()
         self._me=tello.Tello()
         self._me.connect()
+        print(self._me.get_battery())
+        self._me.streamon()
 
     def getJoystickState(self):
         [cm, lr, fb, ud, yv] = self._joystick.tuple
@@ -41,5 +43,5 @@ class JoystickController():
                 self._me.send_rc_control(lr, fb, ud, yv)  
             else:
                 self._me.send_rc_control(0,0,0,0)
-    # def run(self):
-    #     self.controller()    
+    def run(self):
+        self.controller()    

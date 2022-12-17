@@ -2,6 +2,7 @@ import cv2
 from flask import Flask, render_template, Response, stream_with_context, request
 from time import sleep
 from joystickController import JoystickController
+from threading import Thread
 
 joystick_controller = JoystickController()
 
@@ -23,7 +24,11 @@ def stream():
 def video_feed():
     return Response(stream(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
+joystick_controller.start()
+t1 = Thread(target=stream)
+t1.setDaemon(True)
+t1.start()
+
 if __name__ == '__main__':
-    # joystick_controller._me.streamon()
-    # app.run(host="192.168.1.100", port=5000)
-    joystick_controller.controller()
+    app.run(host="192.168.1.200", port=5000)
+    
