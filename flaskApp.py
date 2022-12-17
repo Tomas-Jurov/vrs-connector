@@ -24,6 +24,6 @@ def video_feed():
     return Response(stream(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
-    joystick_controller._me.streamon()
-    app.run(host="192.168.1.100", port=5000)
+    # joystick_controller._me.streamon()
+    # app.run(host="192.168.1.100", port=5000)
     joystick_controller.controller()

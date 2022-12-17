@@ -18,12 +18,14 @@ class JoystickController():
 
         if(cm==110):
             success = self._me.takeoff()
-            print(success)
+            if(success):
+                self._joystick._serial.write(b'\x01')
             print('takeoff')
 
         if(cm==112):
             success = self._me.land()
-            print(success)
+            if(success):
+                self._joystick._serial.write(b'\x01')
             print('landed')
 
 
