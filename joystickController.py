@@ -5,8 +5,9 @@ from threading import Thread
 
 class JoystickController(Thread):
 
-    def __init__(self) -> None:
-        Thread.__init__(self)
+    def __init__(self,shared_bool) -> None:
+        self._shared_bool = shared_bool
+        Thread.__init__(self, args=(self._shared_bool, ))
         self._joystick = Joystick()
         self._joystick.flush_buffers()
         self._me=tello.Tello()
@@ -30,7 +31,11 @@ class JoystickController(Thread):
                 self._joystick._serial.write(b'\x01')
             print('landed')
 
-
+        if(cm==113):
+            self._shared_bool.set()
+        
+        if(cm==114):
+            self._shared_bool.clear()
 
         return [cm, lr, fb, ud, yv]
 
@@ -41,7 +46,6 @@ class JoystickController(Thread):
             
             if(cm==111):
                 self._me.send_rc_control(lr, fb, ud, yv)  
-            else:
-                self._me.send_rc_control(0,0,0,0)
+            
     def run(self):
         self.controller()    
