@@ -102,7 +102,7 @@ def trackFace(info, w, pid, pError,track=False):
 def index():
     return render_template('index.html')
 
-def stream(shared_bool:Event):
+def stream(shared_bool:Event,pError):
     while(True):
         img = joystick_controller._me.get_frame_read().frame
         img = cv2.resize(img, (w,h))
@@ -110,6 +110,7 @@ def stream(shared_bool:Event):
             img, info = findFace(img)
         except:
             info =[[0, 0], 0]
+        print(shared_bool.is_set())
         if(shared_bool.is_set()):    
             pError = trackFace(info,w,pid,pError,shared_bool.is_set())
         frame = cv2.imencode('.jpg',img)[1].tobytes()
@@ -118,10 +119,10 @@ def stream(shared_bool:Event):
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(stream(shared_bool),mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(stream(shared_bool,pError),mimetype='multipart/x-mixed-replace; boundary=frame')
 
 joystick_controller.start()
-t1 = Thread(target=stream, args=(shared_bool,))
+t1 = Thread(target=stream, args=(shared_bool,pError))
 t1.start()
 
 if __name__ == '__main__':
