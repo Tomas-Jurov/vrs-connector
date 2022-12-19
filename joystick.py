@@ -45,9 +45,12 @@ class Joystick():
             self._cm=110
         elif(_start_bit==b'\x70'):
             self._cm=112
+        elif(_start_bit==b'\x71'):
+            self._cm=113
+        elif(_start_bit==b'\x72'):
+            self._cm=114
         elif(_start_bit==b'\x6F'):
             self._cm=111
-        if(self._cm!=0):
             self._get_read_tuple()
         return((self._cm,self._lr,self._fb,self._ud,self._yv))
 
