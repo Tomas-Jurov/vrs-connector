@@ -74,7 +74,7 @@ def fancyDraw(img,bbox, l=30, t=5, rt=1):
 
     return img
 
-def trackFace(me, info, w, pid, pError,track=False):
+def trackFace(info, w, pid, pError,track=False):
     if(track):
         area = info[1]
         x,y = info[0]
@@ -94,7 +94,7 @@ def trackFace(me, info, w, pid, pError,track=False):
             speed = 0
             error = 0
 
-        me.send_rc_control(0, fb, 0, speed)
+        joystick_controller._me.send_rc_control(0, fb, 0, speed)
         return error
 
 
@@ -102,30 +102,28 @@ def trackFace(me, info, w, pid, pError,track=False):
 def index():
     return render_template('index.html')
 
-def stream(shared_bool):
+def stream(shared_bool:Event):
     while(True):
         img = joystick_controller._me.get_frame_read().frame
         img = cv2.resize(img, (w,h))
         try:
             img, info = findFace(img)
         except:
-            info =[[0, 0], 0]    
-        pError = trackFace(joystick_controller._me,info,w,pid,pError,shared_bool.is_set())
+            info =[[0, 0], 0]
+        if(shared_bool.is_set()):    
+            pError = trackFace(info,w,pid,pError,shared_bool.is_set())
         frame = cv2.imencode('.jpg',img)[1].tobytes()
         yield(b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n'+frame+b'\r\n')
         sleep(0.1)
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(stream(),mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(stream(shared_bool),mimetype='multipart/x-mixed-replace; boundary=frame')
 
 joystick_controller.start()
-t1 = Thread(target=stream, args=(shared_bool, ))
-t1.setDaemon(True)
+t1 = Thread(target=stream, args=(shared_bool,))
 t1.start()
-joystick_controller.join()
-t1.join()
 
 if __name__ == '__main__':
-    app.run(host="192.168.1.200", port=5000)
+    app.run(host="192.168.0.150", port=5000)
     

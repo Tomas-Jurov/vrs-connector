@@ -1,13 +1,13 @@
 from djitellopy import tello
 from joystick import Joystick
 from time import sleep
-from threading import Thread
+from threading import Thread, Event
 
 class JoystickController(Thread):
 
-    def __init__(self,shared_bool) -> None:
+    def __init__(self,shared_bool:Event) -> None:
         self._shared_bool = shared_bool
-        Thread.__init__(self, args=(self._shared_bool, ))
+        Thread.__init__(self, args=(self._shared_bool,))
         self._joystick = Joystick()
         self._joystick.flush_buffers()
         self._me=tello.Tello()
