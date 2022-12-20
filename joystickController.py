@@ -18,7 +18,6 @@ class JoystickController(Thread):
     def getJoystickState(self):
         [cm, lr, fb, ud, yv] = self._joystick.tuple
 
-
         if(cm==110):
             success = self._me.takeoff()
             if(success):
@@ -29,14 +28,14 @@ class JoystickController(Thread):
             success = self._me.land()
             if(success):
                 self._joystick._serial.write(b'\x01')
-            print('landed')
+                print('landed')
 
         if(cm==113):
             self._shared_bool.set()
         
         if(cm==114):
             self._shared_bool.clear()
-
+        
         return [cm, lr, fb, ud, yv]
 
 
