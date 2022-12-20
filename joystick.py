@@ -52,6 +52,8 @@ class Joystick():
         elif(_start_bit==b'\x6F'):
             self._cm=111
             self._get_read_tuple()
+        else:
+            self._cm=0
         return((self._cm,self._lr,self._fb,self._ud,self._yv))
 
 
