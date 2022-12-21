@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script src="js/scripts.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body id="about-page">
+  <div class="container">
+    <header class="header">
+        
+            <img center width = 100% height=300px src="{{url_for('static', filename='images/URK.png')}}">
+            <br>
+            <a class="link-title" href="/">VRS final assignment</a>
+      </header>
+    <nav class="menu">
+        <a href="/">Home</a> &nbsp; &nbsp; &nbsp;
+        <a href="/aboutUs">About us</a> &nbsp; &nbsp; &nbsp; 
+        <a href="/liveStream">LiveStream</a>&nbsp; &nbsp; &nbsp; 
+        <a href="/contactList">Contact</a>&nbsp; &nbsp; &nbsp;   
+    </nav>
+    <article class="main">
+        <div class="home-image">
+          <img src="{{url_for('static', filename='AboutUsDocs/FotkaOznamko.jpg')}}" alt="home image" >
+         </div>
+         
+         <div id="profile-info">
+
+             <strong>Name:</strong> Martin <br>
+             <strong>Surname:</strong> Lukáč<br>
+             <strong>Age:</strong> 22<br>
+             <strong>University:</strong> FEI STUBA<br>
+             <strong>Current job:</strong> Back End Developer<br>
+             <ul>
+                 <strong>Skills:</strong>
+                 <li>Java (BE)</li>
+                 <li>JDBC</li>
+                 <li>Python programming</li>
+                 <li>FE</li>
+                 <div class="link">
+                     <a href="https://www.linkedin.com/in/martin-lukáč-44316a242/" target="_blank">
+                        <i class="fa fa-linkedin-square" style="font-size:18px"></i>
+                     </a>
+                 </div>
+             </ul>
+         </div>
+         <div class="description">
+        </div>
+        <div id="home-image-ado">
+            <img src="{{url_for('static', filename='AboutUsDocs/Komorny.jpg')}}" alt="home image" >
+        </div>
+
+        <div id="profile-info-ado">
+            <strong>Name:</strong> Adrian <br>
+            <strong>Surname:</strong> Komorný<br>
+            <strong>Age:</strong> 22<br>
+            <strong>University:</strong> FEI STUBA<br>
+            <strong>Current job:</strong> Junior DevOps Engineer at Aardwark<br>
+            <ul>
+                <strong>Skills:</strong>
+                <li>Audio Engineering</li>
+                <li>MATLAB</li>
+                <li>Python programmer</li>
+                <li>Analytical Skills</li>
+                <div class="link">
+                    <a href="https://www.linkedin.com/in/adrián-komorný-1451b4242/" target="_blank">
+                        <i class="fa fa-linkedin-square" style="font-size:18px"></i>
+                    </a>
+                </div>
+            </ul>
+        </div>
+        <div class="description">
+        </div>
+        <div id="home-image-mario">
+            <img src="{{url_for('static', filename='AboutUsDocs/Jurov.jpg')}}" alt="home image" >
+        </div>
+
+        <div id="profile-info-mario">
+
+            <strong>Name:</strong> Tomaš <br>
+            <strong>Surname:</strong> Jurov<br>
+            <strong>Age:</strong> 22<br>
+            <strong>University:</strong> FEI STUBA<br>
+            <strong>Current job:</strong> QA Photoneo<br>
+            <ul>
+                <strong>Skills:</strong>
+                <li>C++/Python programmer</li>
+                <li>Embedded</li>
+                <li>Basics in JS/Html/CSS</li>
+                <li>Newbie in neural networks</li>
+                <div class="link">
+                    <a href="https://www.linkedin.com/in/martin-lukáč-44316a242/" target="_blank">
+                        <i class="fa fa-linkedin-square" style="font-size:18px"></i>
+                    </a>
+                </div>
+            </ul>
+        </div>
+        <div class="description">
+        </div>
+        <div id="home-image-tomas">
+            <img src="{{url_for('static', filename='AboutUsDocs/Vido.jpg')}}" alt="home image" >
+        </div>
+
+        <div id="profile-info-tomas">
+            <strong>Name:</strong> Mário <br>
+            <strong>Surname:</strong> Vido<br>
+            <strong>Age:</strong> 22<br>
+            <strong>University:</strong> FEI STUBA<br>
+            <strong>Current job:</strong> none<br>
+            <ul>
+                <strong>Skills:</strong>
+                <li>Java</li>
+                <li>MATLAB</li>
+                <li>Basics in JS/Html/CSS</li>
+                <div class="link">
+                    <a href="https://www.linkedin.com/in/martin-lukáč-44316a242/" target="_blank">
+                        <i class="fa fa-linkedin-square" style="font-size:18px"></i>
+                    </a>
+                </div>
+            </ul>
+        </div>
+    </article>
+      <footer>
+        &copy; 2022 Vrs Website &nbsp;<span class="separator">|</span> Design by <a>ML</a> 
+    </footer>
+        </div>
+</body>
+</html>

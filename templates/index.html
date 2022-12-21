@@ -1,9 +1,100 @@
-<html>
-    <head>
-        <title>Streaming</title>
-    </head>
-    <body>
-        <h1>Streaming</h1>
-        <img src="{{url_for('video_feed')}}">
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script src="js/scripts.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+            <img center width = 100% height=300px src="{{url_for('static', filename='images/URK.png')}}" >
+            <br>
+            <a class="link-title" href="/">VRS final assignment</a>
+        
+    </header>
+    
+    <nav class="menu">       
+        <a href="/">Home</a> &nbsp; &nbsp; &nbsp;
+        <a href="/aboutUs">About us</a> &nbsp; &nbsp; &nbsp; 
+        <a href="/liveStream">LiveStream</a>&nbsp; &nbsp; &nbsp; 
+        <a href="/contactList">Contact</a>&nbsp; &nbsp; &nbsp; 
+    </nav>
+    
+    <article class="main">
+      <div class="home-image">
+        <img src="{{url_for('static', filename='images/droneTello.png')}}" alt="home image">              
+      </div>
+        <h1>Dji Tello - Logic Control</h1>
+       <p><h3>Úvod</h3>
+        <p>
+            Tento repozitár vznikol ako semestrálne zadanie Slovenskej Technickej univerzity z predmetu VRS.<br>
+            V nasledujúcom článku sa bližšie pozrieme na riadenie drona Dji Tello zapomoci mikrokontrolera programovaného v stm32, s niekolkými zaujímavími funkciami.
+        </p>
+        <p><h3>Náhlad</h3>
+        <p>
+            Víziou projektu je mať spustený nekonečný ciklus nahraný v mikrokontroleri, ktorý neustále posiela príkazy aklo riadiť drona.<br>
+            Použité funkcie(HAL knižnica):
+        <ul>
+            <li>command - Vstupný režim SDK</li>
+            <li>takeoff - Tello automatický vzlet</li>
+            <li>land - Tello utomatické pristátie</li>
+            <li>streamon/streamoff - Zapnutie/Vypnutie streamovania videa</li>
+        </ul>
+        Kompletnú dokumentáciu príkazov nájdeme <a href="https://terra-1-g.djicdn.com/2d4dce68897a46b19fc717f3576b7c6a/Tello%20编程相关/For%20Tello/Tello%20SDK%20Documentation%20EN_1.3_1122.pdf" target="_blank">tu</a>.<br>
+        Nasledujúcou vymoženosťou je možnosť prepnúť si ovládanie dorna za pomoci tlačidla. Tlačidlo je buď zapnuté alebo vypnuté:
+        <ul>
+            <li>Zapnuté - Dron je v manuálnom riadení ovládaní zapomoci operátora</li>
+            <li>Vypnuté - Dron je v rukách umelej inteligencie, ktorá je vytrénovaná lietať za ludskou tvárou</li>
+        </ul>
+        <p><h3>Komunikácia</h3>
+        <p>Komunikácia prebieha medzi počítačom a mikrokontrolkerom za pomoci UARTu.</p>
+        <p><h3>Funkcionalita</h3>
+        <p>Použite funkcie</p>
+        <p><h3>Vrs-connector-reppo</h3>
+        <p>Používame ešte jeden <a href="https://github.com/Tomas-Jurov/vrs-connector" target="_blank">repozitár</a>, ktorý slúži na prepojenie medzi stm32 a dronom. Je tvorený dvoma threadmi :
+        <ol>
+            <li>Získava a posiela spatnú vezbu do stm32 ohladom dronu. Inými slovami riadi celé STMko.</li>
+            <li>Streamuje obraz kameri na web, a zároven je v ňom implementované riadenie pomocou neurónovej siete.</li>
+        </ol>
+        Technológie použité v tomto repozitáry:
+        <ul>
+            <li>Flask - je v ňom písaný backend</li>
+            <li>PySerial - UART komunikácia medzi počítačom a notebookom</li>
+            <li>UDP-protokol - (knižnica DJITelloPy) ovládanie drona</li>
+            <li>Mediapipe - neurónova sieť vytrénovaná pre nasledovanie tváre</li>
+        </ul>
+        Kompletná dokumentácia na rozbehnutie tohto reppa sa nachádza <a href="https://github.com/Tomas-Jurov/vrs-connector/blob/main/requirements.txt" target="_blank">tu</a>.
+        <p><h3>Prvotné_nastavenie</h3>
+        <p>
+        <ol>
+            <li>Naklonovanie tohto repozitáru do svojho počítača</li>
+            <li>Následne uploadovať na stm32</li>
+            <li>Spustenie commandu <i><strong>pip install -r requirements.txt</strong></i>, (nainštaluje potrebné dependencie)</li>
+            <li>Pustenie aplikácie - flaskApp.py</li>
+        </ol>
+
+        <p><h3>Ovládanie</h3>
+        <p>Po tom ako sme si prvotne nastavili náš projekt, sa môžeme pustit do ovládania:
+            <ul>
+                <li>Páčky k sebe(k telu) - vzlietnutie</li>
+                <li>Následne treba dať páčky naspet do neutrálnej pozícií - ustálenie</li>
+                <li>Následne pomocou páčiek je možné intuitívne riadenie - dron bude lietať ako mu povieme</li>
+                <li>Podržanie lavého džoistika do dola(pár sekúnd) - pristátie</li>
+                <li>Stlačenie tlačidla - prepnutie medzi manuálnym a automatickým riadením</li>
+            </ul>
+        <div class="home-image">
+            <img src="{{url_for('static', filename='images/dron+joystick.png')}}" alt="home image">
+        </div>
+
+
+
+    </article>
+
+    <footer> 
+        &copy; 2022 Vrs Website &nbsp;<span class="separator">|</span> Design by <a>ML</a>
+    </footer>
+    </div>
+</body>
 </html>

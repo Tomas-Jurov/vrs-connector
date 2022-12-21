@@ -102,6 +102,18 @@ def trackFace(info, w, pid, pError,track=False):
 def index():
     return render_template('index.html')
 
+@app.route('/aboutUs', methods=['GET'])
+def aboutUs():
+    return render_template('aboutUs.html')
+
+@app.route('/contactList', methods=['GET'])
+def contactList():
+    return render_template('contactList.html')
+
+@app.route('/liveStream', methods=['GET'])
+def liveStream():
+    return render_template('liveStreamOfTello.html')    
+
 def stream(shared_bool:Event,pError):
     while(True):
         img = joystick_controller._me.get_frame_read().frame
@@ -115,7 +127,7 @@ def stream(shared_bool:Event,pError):
             pError = trackFace(info,w,pid,pError,shared_bool.is_set())
         frame = cv2.imencode('.jpg',img)[1].tobytes()
         yield(b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n'+frame+b'\r\n')
-        sleep(0.1)
+        sleep(0.01)
 
 @app.route('/video_feed')
 def video_feed():
@@ -126,5 +138,5 @@ t1 = Thread(target=stream, args=(shared_bool,pError))
 t1.start()
 
 if __name__ == '__main__':
-    app.run(host="192.168.0.150", port=5000)
+    app.run(host="192.168.1.100", port=5000)
     

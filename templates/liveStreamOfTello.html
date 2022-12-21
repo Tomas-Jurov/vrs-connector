@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script src="js/scripts.js"></script>
+</head>
+<body id="about-page">
+  <div class="container">
+        <header class="header">
+            <img center width = 100% height=300px src="{{url_for('static', filename='images/URK.png')}}">
+            <br>
+            <a class="link-title" href="/">VRS final assignment</a>
+        
+        </header>
+    
+        <nav class="menu">
+        <a href="/">Home</a> &nbsp; &nbsp; &nbsp;
+        <a href="/aboutUs">About us</a> &nbsp; &nbsp; &nbsp; 
+        <a href="/liveStream">LiveStream</a>&nbsp; &nbsp; &nbsp; 
+        <a href="/contactList">Contact</a>&nbsp; &nbsp; &nbsp; 
+        </nav>
+    
+
+    
+    <article class="main">
+        <div id="home-image-livestream">
+          <img src="{{url_for('video_feed')}}">
+        </div> 
+    </article>
+
+
+      <footer>   
+        &copy; 2022 Vrs Website &nbsp;<span class="separator">|</span> Design by <a>ML</a>
+    </footer>
+    </div>
+</body>
+</html>
