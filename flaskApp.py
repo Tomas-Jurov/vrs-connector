@@ -122,7 +122,7 @@ def stream(shared_bool:Event,pError):
             img, info = findFace(img)
         except:
             info =[[0, 0], 0]
-        print(shared_bool.is_set())
+        #print(shared_bool.is_set())
         if(shared_bool.is_set()):    
             pError = trackFace(info,w,pid,pError,shared_bool.is_set())
         frame = cv2.imencode('.jpg',img)[1].tobytes()
